@@ -1,0 +1,24 @@
+html [ng-app]
+
+h1 ドキュメントを登録
+
+div ng-controller="docCtrl"
+  form#docForm novalidate=''
+    label タイトル
+    input type="text" ng-model="doc.title"
+    br
+    label 内容 &nbsp; &nbsp;
+    input type="text" ng-model="doc.content"
+    br
+    button type="submit" ng-click="addDoc()"
+      |add
+  ul
+    li ng-repeat="doc in documents"
+      | {{ doc.title }} / {{ doc.content }}
+
+  pre {{ doc | json }}
+
+input ng-model="sample"
+
+#articles
+  | {{ sample + "1" }}

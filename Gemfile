@@ -44,10 +44,10 @@ group :development do
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'quiet_assets'
 end
 
 gem 'grape'
 gem 'rabl'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: "bootstrap3"
+gem 'slim'

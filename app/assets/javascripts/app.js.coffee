@@ -1,36 +1,15 @@
-_.templateSettings =
-  interpolate: /\{\{(.+?)\}\}/g
-  evaluate: /\{%(.+?)%\}/g
-  escape: /\{%-(.+?)%\}/g
+@docCtrl = ($scope) ->  # or start with window.docCtl
+  $scope.documents = [
+    {title: "sample title1", content: "sample content 1"}
+    {title: "sample title2", content: "sample content 2"}
+  ]
 
-# --------------------
-# Model definitions
-# --------------------
-Article = Backbone.Model.extend
-  urlRoot: "/api/article"
+  $scope.addDoc =  ->
+    console.log "add called"
 
-ArticleList = Backbone.Collection.extend
-  # model: Article
-  url: "/api/article"
+    $scope.documents.push
+      title: $scope.doc.title
+      content: $scope.doc.content
 
-# --------------------
-# View
-# --------------------
-ArticleView = Backbone.View.extend
-  el: '#articles'
-  initialize: (model) ->
-    this.add(model)
-  add: (model) ->
-    this.$el.append(_.template($("#article-template").html(), model))
-
-# --------------------
-# main
-# --------------------
-article = new Article()
-@articleList = new ArticleList()
-@articleList.fetch
-  success: (model, response)->
-    console.log "called"
-    _.each response, (e) ->
-      console.log JSON.stringify(e)
-      new ArticleView(e)
+    $scope.docTitle = ""
+    $scope.docContent = ""
