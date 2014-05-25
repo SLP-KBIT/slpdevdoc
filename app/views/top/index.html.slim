@@ -1,26 +1,35 @@
 html [ng-app='slpdevdoc']
 
-h1 ドキュメントを登録
-
 div ng-controller="articleCtrl"
-  form#articleForm.form novalidate=''
-    .form-group
-      label.control-label タイトル
-      input.form-control type="text" ng-model="article.title"
-    .form-group
-      label.control-label 内容
-      input.form-control type="text" ng-model="article.content"
-    button.btn.btn-success type="submit" ng-click="addArticle()"
-      |add
 
-  h2 ドキュメント一覧
+  - modal_body= capture do
+    form#articleForm.form novalidate=''
+      .form-group
+        label.control-label タイトル
+        input.form-control type="text" ng-model="article.title"
+      .form-group
+        label.control-label 内容
+        input.form-control type="text" ng-model="article.content"
+
+  = modal_dialog id: "addArticleModal",
+      header:  { show_close: true, dismiss: 'modal', title: "新規記事の作成" },
+      body: modal_body,
+      footer: content_tag(:button, 'Add', class: "btn btn-success", ng_click: "addArticle()")
+
+  h2
+    |ドキュメント一覧
+    small
+      = link_to '#addArticleModal', class: "btn btn-xs btn-info", data: { toggle: 'modal' } do
+        = glyph(:plus)
 
   table.table
     tr
       th タイトル
       th 内容
       th
-    tr
+        button class="btn btn-sm btn-default" ng-click="articleFilter.display = !articleFilter.display"
+          = glyph(:filter)
+    tr ng-show="articleFilter.display"
       td
         input ng-model="articleFilter.title"
       td
@@ -37,11 +46,6 @@ div ng-controller="articleCtrl"
         input ng-model="article.content"
       td
         button ng-hide="article.editing" ng-click="article.editing = !article.editing" class="btn btn-xs btn-success"
-          | edit
+          = glyph(:pencil)
         button ng-show="article.editing" ng-click="update(article); article.editing = !article.editing" class="btn btn-xs btn-success"
-          | save
-
-  h2 デバッグ出力
-  pre {{ article | json }}
-
-  pre {{ articles | json }}
+          = glyph('floppy-save')

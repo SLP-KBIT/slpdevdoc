@@ -7,10 +7,9 @@ app.controller 'articleCtrl', ($scope, Article) ->
   $scope.articles = Article.query()
 
   $scope.addArticle =  ->
-    article = angular.copy $scope.article
-    article.editing = false
-    $scope.articles.push(article)
-    $scope.article = null
+    article = new Article(angular.copy $scope.article)
+    article.$save()
+    $scope.articles = Article.query()
 
   $scope.update = (article) ->
     console.log JSON.stringify(article)
