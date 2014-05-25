@@ -4,14 +4,16 @@ app = angular.module('slpdevdoc', [])
 
 app.controller 'articleCtrl', ($scope) ->
   $scope.articles = [
-    {title: "sample title1", content: "sample content 1",}
-    {title: "sample title2", content: "sample content 2"}
+    {title: "sample title1", content: "sample content 1", editing: false}
+    {title: "sample title2", content: "sample content 2", editing: false}
   ]
 
   $scope.addArticle =  ->
-    $scope.articles.push(angular.copy $scope.article)
+    article = angular.copy $scope.article
+    article.editing = false
+    $scope.articles.push(article)
     $scope.article = null
 
-  $scope.edit = (article) ->
-    console.log "edit called"
+  $scope.update = (article) ->
+    console.log "edit called. nothing to do unless using api."
     console.log JSON.stringify(article)

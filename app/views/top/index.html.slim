@@ -21,16 +21,18 @@ div ng-controller="articleCtrl"
       th 内容
       th
     tr ng-repeat="article in articles"
-      div ng-show="!article.editing"
-        td {{ article.title }}
-        td {{ article.content }}
-      div ng-show="article.editing"
-        td
-          input type="text" model="article.title"
-        td
-          input type="text" model="article.content"
+      td ng-hide="article.editing" {{ article.title }}
+      td ng-show="article.editing"
+        input ng-model="article.title"
+      td ng-hide="article.editing" {{ article.content }}
+      td ng-show="article.editing"
+        input ng-model="article.content"
       td
-        button ng-click="article.editing = true"
-          | link
+        button ng-hide="article.editing" ng-click="article.editing = !article.editing" class="btn btn-xs btn-success"
+          | edit
+        button ng-show="article.editing" ng-click="update(article); article.editing = !article.editing" class="btn btn-xs btn-success"
+          | save
 
   pre {{ article | json }}
+
+  pre {{ articles | json }}
