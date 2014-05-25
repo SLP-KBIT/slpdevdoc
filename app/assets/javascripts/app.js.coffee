@@ -2,8 +2,7 @@ app = angular.module('slpdevdoc', [])
 
 # app.factory('article', function)
 
-
-@articleCtrl = ($scope) ->  # or start with window.articleCtl
+app.controller 'articleCtrl', ($scope) ->
   $scope.articles = [
     {title: "sample title1", content: "sample content 1",}
     {title: "sample title2", content: "sample content 2"}

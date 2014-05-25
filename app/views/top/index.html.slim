@@ -1,4 +1,4 @@
-html [ng-app='']
+html [ng-app='slpdevdoc']
 
 h1 ドキュメントを登録
 
@@ -32,15 +32,5 @@ div ng-controller="articleCtrl"
       td
         button ng-click="article.editing = true"
           | link
-  / hr
-  / form#editForm.form novalidate=""
-  /   .form-group
-  /     label.control-label タイトル
-  /     input.form-control type="text" ng-model="editarticle.title"
-  /   .form-group
-  /     label.control-label 内容
-  /     input.formcontrol type="text" ng-model="editarticle.content"
-  /   button.btn.btn-success type="submit"
-  /     | edit
 
-  pre {{ $scope | json }}
+  pre {{ article | json }}
