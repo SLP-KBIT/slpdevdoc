@@ -20,7 +20,15 @@ div ng-controller="articleCtrl"
       th タイトル
       th 内容
       th
-    tr ng-repeat="article in articles"
+    tr
+      td
+        input ng-model="articleFilter.title"
+      td
+        input ng-model="articleFilter.content"
+      td
+        button ng-click="articleFilter = null" class="btn btn-sm"
+          | reset
+    tr ng-repeat="article in articles | filter:{title: articleFilter.title} | filter:{content: articleFilter.content}"
       td ng-hide="article.editing" {{ article.title }}
       td ng-show="article.editing"
         input ng-model="article.title"
@@ -33,6 +41,7 @@ div ng-controller="articleCtrl"
         button ng-show="article.editing" ng-click="update(article); article.editing = !article.editing" class="btn btn-xs btn-success"
           | save
 
+  h2 デバッグ出力
   pre {{ article | json }}
 
   pre {{ articles | json }}

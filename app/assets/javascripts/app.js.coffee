@@ -13,6 +13,5 @@ app.controller 'articleCtrl', ($scope, Article) ->
     $scope.article = null
 
   $scope.update = (article) ->
-    console.log "edit called. nothing to do unless using api."
     console.log JSON.stringify(article)
     article.$save()
