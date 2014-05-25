@@ -1,12 +1,10 @@
-app = angular.module('slpdevdoc', [])
+app = angular.module('slpdevdoc', ['ngResource'])
 
-# app.factory('article', function)
+app.factory 'Article', ($resource) =>
+  Article = $resource('/api/article/:id', id: '@id')
 
-app.controller 'articleCtrl', ($scope) ->
-  $scope.articles = [
-    {title: "sample title1", content: "sample content 1", editing: false}
-    {title: "sample title2", content: "sample content 2", editing: false}
-  ]
+app.controller 'articleCtrl', ($scope, Article) ->
+  $scope.articles = Article.query()
 
   $scope.addArticle =  ->
     article = angular.copy $scope.article
