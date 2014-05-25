@@ -1,24 +1,46 @@
-html [ng-app]
+html [ng-app='']
 
 h1 ドキュメントを登録
 
-div ng-controller="docCtrl"
-  form#docForm novalidate=''
-    label タイトル
-    input type="text" ng-model="doc.title"
-    br
-    label 内容 &nbsp; &nbsp;
-    input type="text" ng-model="doc.content"
-    br
-    button type="submit" ng-click="addDoc()"
+div ng-controller="articleCtrl"
+  form#articleForm.form novalidate=''
+    .form-group
+      label.control-label タイトル
+      input.form-control type="text" ng-model="article.title"
+    .form-group
+      label.control-label 内容
+      input.form-control type="text" ng-model="article.content"
+    button.btn.btn-success type="submit" ng-click="addArticle()"
       |add
-  ul
-    li ng-repeat="doc in documents"
-      | {{ doc.title }} / {{ doc.content }}
 
-  pre {{ doc | json }}
+  h2 ドキュメント一覧
 
-input ng-model="sample"
+  table.table
+    tr
+      th タイトル
+      th 内容
+      th
+    tr ng-repeat="article in articles"
+      div ng-show="!article.editing"
+        td {{ article.title }}
+        td {{ article.content }}
+      div ng-show="article.editing"
+        td
+          input type="text" model="article.title"
+        td
+          input type="text" model="article.content"
+      td
+        button ng-click="article.editing = true"
+          | link
+  / hr
+  / form#editForm.form novalidate=""
+  /   .form-group
+  /     label.control-label タイトル
+  /     input.form-control type="text" ng-model="editarticle.title"
+  /   .form-group
+  /     label.control-label 内容
+  /     input.formcontrol type="text" ng-model="editarticle.content"
+  /   button.btn.btn-success type="submit"
+  /     | edit
 
-#articles
-  | {{ sample + "1" }}
+  pre {{ $scope | json }}
