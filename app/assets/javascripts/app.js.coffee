@@ -36,11 +36,11 @@ app.controller 'articleCtrl', ($scope, Article) ->
 
   $scope.edit = ->
     console.log "edit called"
-    console.log JSON.stringify this.article
+    # console.log JSON.stringify this.article
     $scope.modalTitle = "記事の編集"
     $scope.modalButton = "Save"
     $scope.modalSubmit = "update()"
-    $scope.article = this.article
+    $scope.article = $scope.showArticle
 
   $scope.update = () ->
     article = scope.article

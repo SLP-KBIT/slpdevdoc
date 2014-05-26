@@ -25,31 +25,27 @@ div ng-controller="articleCtrl"
 
       table.table
         tr
-          th タイトル
-          th 内容
           th
+            |タイトル
             button class="btn btn-sm btn-default" ng-click="articleFilter.display = !articleFilter.display"
               = glyph(:filter)
+          th
         tr ng-show="articleFilter.display"
           td
             input ng-model="articleFilter.title"
-          td
-            input ng-model="articleFilter.content"
-          td
             button ng-click="articleFilter = null" class="btn btn-sm"
               | reset
-        tr ng-repeat="article in articles | filter:{title: articleFilter.title} | filter:{content: articleFilter.content}"
+        tr ng-repeat="article in articles | filter:{title: articleFilter.title}"
           td
             a ng-click="show(article)"
               | {{ article.title }}
-          td {{ article.content }}
-          td
-            a.btn.btn-xs.btn-info ng-click="edit()" href="#addArticleModal" data-toggle="modal"
-              = glyph(:pencil)
 
     #main.col-xs-offset-1.col-xs-7.main
       h2
         | {{ showArticle.title }}
-        small {{ showArticle.created_at | date:'yyyy/M/d' }}
+        small
+          |{{ showArticle.created_at | date:'yyyy/M/d' }}
+          a.btn.btn-xs.btn-info ng-click="edit()" href="#addArticleModal" data-toggle="modal" ng-if="showArticle"
+            = glyph(:pencil)
       hr
       #mdContent
