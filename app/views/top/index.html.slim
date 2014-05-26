@@ -11,7 +11,7 @@ div ng-controller="articleCtrl"
         input.form-control type="text" ng-model="article.title"
       .form-group
         label.control-label 内容
-        textarea.form-control type="text" ng-model="article.content"
+        textarea.form-control type="text" ng-model="article.content" rows="10"
 
   = modal_dialog id: "addArticleModal",
       header:  { show_close: true, dismiss: 'modal', title: "{{ modalTitle }}" },
