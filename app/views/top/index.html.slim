@@ -39,17 +39,11 @@ div ng-controller="articleCtrl"
             button ng-click="articleFilter = null" class="btn btn-sm"
               | reset
         tr ng-repeat="article in articles | filter:{title: articleFilter.title} | filter:{content: articleFilter.content}"
-          td ng-hide="article.editing"
+          td
             a ng-click="show(article)"
               | {{ article.title }}
-          td ng-show="article.editing"
-            input ng-model="article.title"
-          td ng-hide="article.editing" {{ article.content }}
-          td ng-show="article.editing"
-            input ng-model="article.content"
+          td {{ article.content }}
           td
-
-            / a.btn.btn-xs.btn-info ng-click="edit()" href="#editArticleModal" data-toggle="modal"
             a.btn.btn-xs.btn-info ng-click="edit()" href="#addArticleModal" data-toggle="modal"
               = glyph(:pencil)
 
