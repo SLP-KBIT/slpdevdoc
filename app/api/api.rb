@@ -15,7 +15,7 @@ class API < Grape::API
   resource :article do
     desc "return articles"
     get do
-      Article.limit(10)
+      Article.all#.limit(10)
     end
 
     desc "return a article"
