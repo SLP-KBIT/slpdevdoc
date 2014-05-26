@@ -1,8 +1,11 @@
 html [ng-app='slpdevdoc']
 
+script
+  |hljs.initHighlightingOnLoad();
+
 div ng-controller="articleCtrl"
   - modal_body= capture do
-    form#articleForm.form novalidate=''
+    form#articleForm.form novalidate='' name="articleForm"
       .form-group
         label.control-label タイトル
         input.form-control type="text" ng-model="article.title"
@@ -37,7 +40,7 @@ div ng-controller="articleCtrl"
               | reset
         tr ng-repeat="article in articles | filter:{title: articleFilter.title}"
           td
-            a ng-click="show(article)"
+            a ng-click="show()"
               | {{ article.title }}
 
     #main.col-xs-offset-1.col-xs-7.main
@@ -49,3 +52,6 @@ div ng-controller="articleCtrl"
             = glyph(:pencil)
       hr
       #mdContent
+
+javascript:
+  hljs.initHighlightingOnLoad();

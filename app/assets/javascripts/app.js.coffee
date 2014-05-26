@@ -35,8 +35,6 @@ app.controller 'articleCtrl', ($scope, Article) ->
     $scope.articles = Article.query()
 
   $scope.edit = ->
-    console.log "edit called"
-    # console.log JSON.stringify this.article
     $scope.modalTitle = "記事の編集"
     $scope.modalButton = "Save"
     $scope.modalSubmit = "update()"
@@ -44,9 +42,14 @@ app.controller 'articleCtrl', ($scope, Article) ->
 
   $scope.update = () ->
     article = scope.article
-    console.log JSON.stringify(article)
     article.$save()
 
   $scope.show = ->
     $scope.showArticle = this.article
-    $('#mdContent').html(marked(this.article.content))
+    marked.setOptions
+      gfm: true
+      langPrefix: ''
+      highlight: (code, lang)->
+        return hljs.highlight(lang, code).value
+    angular.element('#mdContent').html(marked(this.article.content))
+    return
