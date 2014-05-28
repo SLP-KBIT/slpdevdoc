@@ -63,4 +63,11 @@ class API < Grape::API
     end
   end
 
+  resource :tag do
+    desc "return tags"
+    get '/', rabl: 'tags.json' do
+      @tags = ActsAsTaggableOn::Tag.all unless params[:query]
+      @tags ||= ActsAsTaggableOn::Tag.where('name LIKE ?', "%#{params[:query]}%")
+    end
+  end
 end

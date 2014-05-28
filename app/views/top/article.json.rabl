@@ -4,6 +4,6 @@ node :created_at do |article|
   article.created_at.to_s(:date)
 end
 
-node :tags do |article|
-  article.tags.map(&:name)
+child :tags , object_root: false do |ch|
+  attributes name: :text
 end

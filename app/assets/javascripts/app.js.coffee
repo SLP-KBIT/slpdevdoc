@@ -1,4 +1,4 @@
-app = angular.module('slpdevdoc', ['ngResource', 'ngRoute'])
+app = angular.module('slpdevdoc', ['ngResource', 'ngRoute', 'ngTagsInput'])
 
 # app.config ($routeProvider) ->
 #   $routeProvider
@@ -60,3 +60,8 @@ app.controller 'articleCtrl', ($scope, Article) ->
         return hljs.highlight(lang, code).value
     angular.element('#mdContent').html(marked(this.article.content))
     return
+
+app.controller 'tagCtrl', ($scope, $http) ->
+  $scope.loadTags = (query) =>
+    console.log "called load tags"
+    $http.get('/api/tag?query=' + query)
