@@ -45,13 +45,21 @@ div ng-controller="articleCtrl"
           th
         tr ng-show="articleFilter.display"
           td
-            input ng-model="articleFilter.title"
+            .form-group
+              label.control-label タイトル
+              input.form-control ng-model="articleFilter.title"
+            .form-group
+              label.control-label タグ
+              input.form-control ng-model="articleFilter.tag"
             button ng-click="articleFilter = null" class="btn btn-sm"
               | reset
-        tr ng-repeat="article in articles | filter:{title: articleFilter.title}"
+        tr ng-repeat="article in articles | filter:{title: articleFilter.title} | filter:{tags_str: articleFilter.tag}"
           td
             a ng-click="show()"
               | {{ article.title }}
+            .rows
+              span.label.label-info ng-repeat="tag in article.tags"
+                | {{tag.name}}
 
     #main.col-xs-offset-1.col-xs-7.main
       div ng-if="showArticle"
