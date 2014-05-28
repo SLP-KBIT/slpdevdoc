@@ -14,6 +14,7 @@ app.factory 'Article', ($resource) =>
 
 app.controller 'articleCtrl', ($scope, Article) ->
   $scope.articles = Article.query()
+  console.log JSON.stringify($scope.articles)
 
   $scope.save = ->
     $('#addArticleModal').modal('hide')

@@ -1,5 +1,6 @@
 class API < Grape::API
   format :json
+  formatter :json, Grape::Formatter::Rabl
   prefix "api"
 
   helpers do
@@ -14,8 +15,8 @@ class API < Grape::API
 
   resource :article do
     desc "return articles"
-    get do
-      Article.all#.limit(10)
+    get '/', rabl: 'articles.json' do
+      @articles = Article.all.includes(:tags) #.limit(10)
     end
 
     desc "return a article"

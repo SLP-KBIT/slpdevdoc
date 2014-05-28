@@ -38,6 +38,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.2.5)
+      actionpack (>= 3, < 5)
+      activerecord (>= 3, < 5)
     annotate (2.6.3)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -79,6 +82,11 @@ GEM
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
+    grape-rabl (0.2.2)
+      grape
+      i18n
+      rabl
+      tilt
     hashie (2.1.1)
     hike (1.2.3)
     i18n (0.6.9)
@@ -114,7 +122,7 @@ GEM
       pry (>= 0.9.10)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
-    rabl (0.9.3)
+    rabl (0.10.0)
       activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-accept (0.4.5)
@@ -192,18 +200,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   annotate
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
   grape
+  grape-rabl
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
   pg
   pry-rails
   quiet_assets
-  rabl
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
