@@ -4,7 +4,7 @@ script
   |hljs.initHighlightingOnLoad();
 
 div ng-controller="articleCtrl"
-  - modal_body= capture do
+  - add_modal_body= capture do
     form#articleForm.form novalidate='' name="articleForm"
       .form-group
         label.control-label タイトル
@@ -18,8 +18,14 @@ div ng-controller="articleCtrl"
 
   = modal_dialog id: "addArticleModal",
       header:  { show_close: true, dismiss: 'modal', title: "{{ modalTitle }}" },
-      body: modal_body,
+      body: add_modal_body,
       footer: content_tag(:button, '{{ modalButton }}', class: "btn btn-success", ng_click: "save()")
+
+
+  = modal_dialog id: "deleteArticleModal",
+      header:  { show_close: true, dismiss: 'modal', title: "削除確認" },
+      body: "記事を削除してもよろしいですか？",
+      footer: content_tag(:button, '削除', class: "btn btn-danger", ng_click: "delete()", data: { dismiss: "modal" }) + content_tag(:button, 'キャンセル', class: 'btn btn-default', data: { dismiss: 'modal' })
 
   .row
     .col-xs-4.sidebar
@@ -47,17 +53,21 @@ div ng-controller="articleCtrl"
               | {{ article.title }}
 
     #main.col-xs-offset-1.col-xs-7.main
-      h2
-        | {{ showArticle.title }} &nbsp;
-        small
-          | {{ showArticle.created_at | date:'yyyy/M/d' }} &nbsp;
-          a.btn.btn-xs.btn-info ng-click="edit()" href="#addArticleModal" data-toggle="modal" ng-if="showArticle"
-            = glyph(:pencil)
-          | &nbsp;
-          | {{ showArticle.tags }}
-      hr
+      div ng-if="showArticle"
+        h2
+          | {{ showArticle.title }} &nbsp;
+          small
+            | {{ showArticle.created_at | date:'yyyy/M/d' }} &nbsp;
+            a.btn.btn-xs.btn-info ng-click="edit()" href="#addArticleModal" data-toggle="modal"
+              = glyph(:pencil)
+            | &nbsp;
+            a.btn.btn-xs.btn-danger href="#deleteArticleModal" data-toggle="modal"
+              = glyph(:remove)
+            | &nbsp;
+            | {{ showArticle.tags }}
+        hr
 
-      pre {{ showArticle.tags | json }}
+        pre {{ showArticle.tags | json }}
 
       #mdContent
 

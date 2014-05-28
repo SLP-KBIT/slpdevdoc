@@ -54,6 +54,13 @@ class API < Grape::API
       end
     end
 
+    desc "delete article"
+    route_param :id do
+      delete do
+        article = Article.where(id: params[:id]).first
+        article.destroy
+      end
+    end
   end
 
 end

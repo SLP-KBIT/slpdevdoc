@@ -45,6 +45,12 @@ app.controller 'articleCtrl', ($scope, Article) ->
     article = scope.article
     article.$save()
 
+  $scope.delete = ->
+    $scope.showArticle.$delete()
+    $scope.showArticle = null
+    angular.element('#mdContent').html('')
+    $scope.articles = Article.query()
+
   $scope.show = ->
     $scope.showArticle = this.article
     marked.setOptions
