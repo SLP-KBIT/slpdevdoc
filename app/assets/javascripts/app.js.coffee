@@ -12,17 +12,30 @@ app = angular.module('slpdevdoc', ['ngResource', 'ngRoute', 'ngTagsInput'])
 app.factory 'Article', ($resource) =>
   Article = $resource('/api/article/:id', id: '@id')
 
-app.controller 'articleCtrl', ($scope, Article) ->
+app.controller 'articleCtrl', ($scope, $http, Article) ->
   $scope.articles = Article.query()
-  console.log JSON.stringify($scope.articles)
 
   $scope.save = ->
+    console.log "query first on save: " + JSON.stringify($scope.articles[0])
     $('#addArticleModal').modal('hide')
     article = $scope.article
+    tags = article.tags
     if $scope.modalButton == "Add"
       article = new Article(angular.copy $scope.article)
-    article.$save()
-    $scope.articles = Article.query()
+    article.$save( (e) =>
+      console.log "save response: " +
+      $scope.article = e
+      $scope.article.tags = tags
+      $scope.updateTags()
+      $scope.articles = Article.query()
+    )
+
+  $scope.updateTags = ->
+    console.log "$scope.article.tags: in updateTags: " + JSON.stringify($scope.article)
+    tags = $.map $scope.article.tags, (e) =>
+      e.name
+    param_tags = tags.join(",")
+    $http.post '/api/article/' + $scope.article.id + '/tags', tags: param_tags
 
   $scope.new = ->
     $scope.modalTitle = "記事の作成"
@@ -52,6 +65,7 @@ app.controller 'articleCtrl', ($scope, Article) ->
     $scope.articles = Article.query()
 
   $scope.show = ->
+    console.log "query first on show: " + JSON.stringify($scope.articles[0])
     $scope.showArticle = this.article
     marked.setOptions
       gfm: true

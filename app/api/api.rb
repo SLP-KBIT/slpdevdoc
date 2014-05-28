@@ -49,6 +49,9 @@ class API < Grape::API
     route_param :id do
       post do
         article = Article.where(id: params[:id]).first
+        params[:tags].each do |tag|
+          article.tag_list.add(tag.text)
+        end
         article.update_attributes(article_params)
         article
       end
@@ -59,6 +62,19 @@ class API < Grape::API
       delete do
         article = Article.where(id: params[:id]).first
         article.destroy
+      end
+    end
+
+    desc "add tags to article"
+    route_param :id do
+      post '/tags' do
+        article = Article.where(id: params[:id]).first
+        logger.debug "article:" + article.inspect
+        logger.debug "tags:" + params[:tags]
+        params[:tags].split(",").each do |tag|
+          article.tag_list.add(tag)
+        end
+        article.save
       end
     end
   end

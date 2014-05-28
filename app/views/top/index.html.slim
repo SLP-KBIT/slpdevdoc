@@ -11,7 +11,7 @@ div ng-controller="articleCtrl"
         input.form-control type="text" ng-model="article.title"
       .form-group
         label.control-label タグ
-        tags-input ng-model="article.tags"
+        tags-input ng-model="article.tags" display-property="name"
           auto-complete ng-controller="tagCtrl" source="loadTags($query)"
       .form-group
         label.control-label 内容

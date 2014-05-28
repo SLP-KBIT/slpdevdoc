@@ -1,4 +1,4 @@
 collection @tags, object_root: false
-node :text do |tag|
+node :name do |tag|
   tag.name
 end

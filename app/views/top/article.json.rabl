@@ -5,5 +5,5 @@ node :created_at do |article|
 end
 
 child :tags , object_root: false do |ch|
-  attributes name: :text
+  attributes :name
 end
