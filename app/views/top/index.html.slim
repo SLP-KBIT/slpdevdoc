@@ -64,11 +64,10 @@ div ng-controller="articleCtrl"
             | &nbsp;
             a.btn.btn-xs.btn-danger href="#deleteArticleModal" data-toggle="modal"
               = glyph(:remove)
-            | &nbsp;
-            | {{ showArticle.tags }}
+            br
+            span.label.label-info ng-repeat="tag in showArticle.tags"
+              | {{tag.name}}
         hr
-
-        pre {{ showArticle.tags | json }}
 
       #mdContent
 
