@@ -52,3 +52,5 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: "bootstrap3"
 gem 'slim'
 gem 'acts-as-taggable-on'
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-helpers'

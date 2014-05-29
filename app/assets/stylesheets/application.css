@@ -11,6 +11,6 @@
  * file per style scope.
  *
  *= require github
- *= require_tree .
+ *= require darkly/loader
  *= require_self
  */

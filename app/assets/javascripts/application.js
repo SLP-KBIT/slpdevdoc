@@ -12,8 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require darkly/loader
 //= require twitter/bootstrap
+//= require highlight.pack
 //= require turbolinks
 //= require angular-min
+//= require angular-resource.min
+//= require angular-route.min
+//= require ng-tags-input.min
+//= require marked
 //= require app
-//= require_tree .
