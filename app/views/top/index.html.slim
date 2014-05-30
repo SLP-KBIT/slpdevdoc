@@ -28,11 +28,12 @@ div ng-controller="articleCtrl"
 
   .row
     .col-xs-3.sidebar
+
       table.table
         tr
           th
-            |タイトル &nbsp;
             button class="btn btn-sm btn-default" ng-click="articleFilter.display = !articleFilter.display"
+              |フィルタ &nbsp;
               = glyph(:filter)
           th
         tr ng-show="articleFilter.display"
