@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" ng-app="slpdevdoc">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -46,11 +46,19 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">Slpdevdoc</a>
+
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li>
+              <!-- <a href="#addArticleModal" class="btn btn-xs btn-primary" data-toggle="modal" ng-click="new()"> -->
+              <a href="#addArticleModal" data-toggle="modal" ng-click="new()">
+                <span class="glyphicon glyphicon-plus">記事の追加
+              </a>
+            </li>
+
+            <!-- <li><%= link_to "Link1", "/path1"  %></li> -->
+            <!-- <li><%= link_to "Link2", "/path2"  %></li> -->
+            <!-- <li><%= link_to "Link3", "/path3"  %></li> -->
           </ul>
         </div>
       </div>
