@@ -48,7 +48,7 @@ div
               | reset
         tr ng-repeat="article in articles | filter:{title: articleFilter.title} | filter:{tags_str: articleFilter.tag}"
           td
-            a ng-click="show()"
+            a ng-click="show()" href=""
               | {{ article.title }}
             .rows
               span.label.label-primary ng-repeat="tag in article.tags"
