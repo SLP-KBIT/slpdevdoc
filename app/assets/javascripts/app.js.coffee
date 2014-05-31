@@ -16,14 +16,12 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
   $scope.articles = Article.query()
 
   $scope.save = ->
-    console.log "query first on save: " + JSON.stringify($scope.articles[0])
     $('#addArticleModal').modal('hide')
     article = $scope.article
     tags = article.tags
     if $scope.modalButton == "Add"
       article = new Article(angular.copy $scope.article)
     article.$save( (e) =>
-      console.log "save response: " +
       $scope.article = e
       $scope.article.tags = tags
       $scope.updateTags()
@@ -65,7 +63,6 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
     $scope.articles = Article.query()
 
   $scope.show = ->
-    console.log "query first on show: " + JSON.stringify($scope.articles[0])
     $scope.showArticle = this.article
     marked.setOptions
       gfm: true
@@ -75,7 +72,11 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
     angular.element('#mdContent').html(marked(this.article.content))
     return
 
+  $scope.tagSearch = ->
+    $scope.articleFilter = {}
+    $scope.articleFilter.display = true
+    $scope.articleFilter.tag = this.tag.name
+
 app.controller 'tagCtrl', ($scope, $http) ->
   $scope.loadTags = (query) =>
-    console.log "called load tags"
     $http.get('/api/tag?query=' + query)

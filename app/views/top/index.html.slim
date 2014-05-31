@@ -51,7 +51,7 @@ div
             a ng-click="show()" href=""
               | {{ article.title }}
             .rows
-              span.label.label-primary ng-repeat="tag in article.tags"
+              a.label.label-primary ng-repeat="tag in article.tags" ng-click="tagSearch()" href=""
                 | {{tag.name}}
 
     #main.col-xs-9.main

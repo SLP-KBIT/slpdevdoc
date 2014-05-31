@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-li.tag-item {
+.tag-item {
   color: #000;
+}
+
+.label {
+  margin-right: 5px;
+}
+a.label {
+    text-decoration: none;
 }
