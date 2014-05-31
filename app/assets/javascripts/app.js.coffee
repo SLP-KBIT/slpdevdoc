@@ -26,10 +26,10 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
       $scope.article.tags = tags
       $scope.updateTags()
       $scope.articles = Article.query()
+      $scope.show() if $scope.modalButton == "Save"
     )
 
   $scope.updateTags = ->
-    console.log "$scope.article.tags: in updateTags: " + JSON.stringify($scope.article)
     tags = $.map $scope.article.tags, (e) =>
       e.name
     param_tags = tags.join(",")
@@ -52,10 +52,6 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
     $scope.modalSubmit = "update()"
     $scope.article = $scope.showArticle
 
-  $scope.update = () ->
-    article = scope.article
-    article.$save()
-
   $scope.delete = ->
     $scope.showArticle.$delete()
     $scope.showArticle = null
@@ -68,7 +64,7 @@ app.controller 'articleCtrl', ($scope, $http, Article) ->
       gfm: true
       langPrefix: ''
       highlight: (code, lang)->
-        return hljs.highlight(lang, code).value
+        return hljs.highlightAuto(code).value
     angular.element('#mdContent').html(marked(this.article.content))
     return
 
